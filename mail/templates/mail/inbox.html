@@ -1,0 +1,66 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <h2>{{ request.user.email }}</h2>
+    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
+    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
+    <hr>
+    <div id="emails-view">
+    </div>
+
+    <div id="compose-view">
+        <h3>New Email</h3>
+        <form id="compose-form">
+            <div class="form-group">
+                From: <input disabled class="form-control" value="{{ request.user.email }}">
+            </div>
+            <div class="form-group">
+                 To: <input id="compose-recipients" class="form-control">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="compose-subject" placeholder="Subject">
+            </div>
+            <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
+            <hr style="margin-top: 0px;">
+             <div class="text-right">
+                 <input type="submit" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+
+    <div id="msg-view" class="col-lg-9 col-md-8">
+        <div class="subject_and_buttons">
+            <h3 id="subject" style="margin-bottom: 0px;"></h3>
+            <div id="buttons">
+                <button type="button" class="btn btn-primary" id="archive"><i class="bi bi-archive"></i></button>
+                <button type="button" class="btn btn-secondary" id="unread"><i class="bi bi-envelope"></i></button>
+            </div>
+        </div>
+        <hr style="margin-bottom: 0px;">
+        <div style="margin-top: 0px;" class="card shadow-none border border-light">
+            <div class="card-body" style="padding:1rem; padding-bottom: 0.5rem; padding-left: 0px; ">
+                <div class="media mb-3">
+                    <div class="media-body">
+                        <span class="media-meta float-right" id="date" style="padding-top: 6px;"></span>
+                        <h4 class="text-primary m-0" id="sender"></h4>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-top: 0px;">
+            <p id="body"></p>
+            <hr style="margin-top: 0px;">
+            <div class="text-right">
+                <button type="button" class="btn btn-primary waves-effect waves-light mt-3" id="replay_button"><i class="fa fa-reply mr-1"></i> Reply</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}

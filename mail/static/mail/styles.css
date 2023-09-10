@@ -1,0 +1,14 @@
+textarea {
+    min-height: 400px;
+}
+
+.subject_and_buttons{
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    width: auto;
+}
+
+.archive_button{
+    float: right;
+}
